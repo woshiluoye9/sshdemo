@@ -1,0 +1,27 @@
+package com.dustin.mapperTest;
+
+import com.dustin.mybatis.mapper.UserMapper;
+import com.dustin.mybatis.po.User;
+import org.junit.Before;
+import org.junit.Test;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+public class UserMapperTest {
+
+	private ApplicationContext applicationContext;
+
+	//在setUp这个方法得到spring容器
+	@Before
+	public void setUp() throws Exception {
+		applicationContext = new ClassPathXmlApplicationContext("classpath:spring/applicationContext.xml");
+	}
+
+	@Test
+	public void testFindUserById() throws Exception {
+		UserMapper userMapper = (UserMapper) applicationContext.getBean("userMapper");
+		User user = userMapper.queryUserById(1);
+		System.out.println(user);
+	}
+
+}
